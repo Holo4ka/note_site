@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Записи в блоге</h1>
+{% for item in notes%}
+<div class="col-md6 border rounded">
+
+    <div>
+        {{item.text}}
+    </div>
+    <div>
+        Автор - {{item.user.name}}
+    </div>
+</div>
+{% endfor %}
+
+{% endblock %}
