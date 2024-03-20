@@ -5,6 +5,7 @@ from flask_login import LoginManager, login_user, login_required, logout_user, c
 from data.users import User
 from data.notes import Note
 from forms.user import RegisterForm
+from forms.newNoteForm import NoteAddingForm
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
@@ -69,6 +70,7 @@ def index():
     db_sess = db_session.create_session()
     if current_user.is_authenticated:
         notes = db_sess.query(Note).filter(Note.user == current_user)
+        form = NoteAddingForm()
     else:
         form = LoginForm()
         if form.validate_on_submit():
@@ -82,7 +84,7 @@ def index():
                                    form=form)
         return render_template('login.html', title='Авторизация', form=form)
 
-    return render_template("index.html", notes=notes)
+    return render_template("index.html", notes=notes, form=form)
 
 
 if __name__ == '__main__':

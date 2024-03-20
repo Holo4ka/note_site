@@ -15,3 +15,47 @@
 {% endfor %}
 
 {% endblock %}
+
+
+{% block modal %}
+<button class="addnote-button" id="show-dialog-btn">Добавить заметку</button>
+<dialog id="my-dialog">
+    <h1>Новая заметка</h1>
+    <p>
+    {{ form.header.label }}<br>
+    {{ form.header(class="form-control") }}<br>
+    {% for error in form.header.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.text.label }}<br>
+        {{ form.text(class="large-text") }}<br>
+        {% for error in form.text.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>{{ form.submit(type="submit", class="btn btn-primary") }}</p>
+    {{message}}
+  <button id="close-dialog-btn">Закрыть</button>
+</dialog>
+
+<script>
+  const showDialogBtn = document.querySelector('#show-dialog-btn');
+  const myDialog = document.querySelector('#my-dialog');
+  const closeDialogBtn = document.querySelector('#close-dialog-btn');
+
+  showDialogBtn.addEventListener('click', () => {
+    myDialog.showModal();
+  });
+
+  closeDialogBtn.addEventListener('click', () => {
+    myDialog.close();
+  });
+
+</script>
+{% endblock %}

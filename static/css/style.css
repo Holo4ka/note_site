@@ -12,7 +12,21 @@
   font-weight: 300;
   color: white;
 }
+
 .addnote-button:hover {
   color: white;
   text-decoration: none
+}
+
+dialog {
+    width: 600px; /* Ширина диалогового окна */
+    height: 600px; /* Высота диалогового окна */
+    background-color: #f0f0f0; /* Цвет фона диалогового окна */
+    border: 1px solid #ccc; /* Граница диалогового окна */
+    border-radius: 5px;
+}
+
+.large-text {
+    height: 250px;
+    width: 100%
 }
