@@ -1,24 +1,6 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Заметки</h1>
-{% for item in notes%}
-<div class="col-md6 border rounded">
-
-    <div class="header">
-        Название - {{item.header}}
-    </div>
-    <div>
-        {{item.text}}
-    </div>
-</div>
-{% endfor %}
-
-{% endblock %}
-
-
-<{% block modal %}
-<dialog id="my-dialog">
     <form action="" method="post">
         {{ form.hidden_tag() }}
     <h1>Новая заметка</h1>
@@ -43,9 +25,7 @@
     <p>{{ form.submit(type="submit", class="btn btn-primary") }}</p>
     {{message}}
     </form>
-  <button id="close-dialog-btn">Закрыть</button>
-</dialog>
-
+  <!--button id="close-dialog-btn">Закрыть</button>
 
 <script>
   const showDialogBtn = document.querySelector('#show-dialog-btn');
@@ -61,6 +41,5 @@
     myDialog.close();
   });
 
-
-</script>
-{% endblock %}>
+</script-->
+{% endblock %}

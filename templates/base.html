@@ -14,10 +14,10 @@
 <header>
     <nav class="navbar navbar-light bg-light">
         {% if current_user.is_authenticated %}
-    <a class="navbar-brand" href="/logout">Выйти</a>
+        <a class="navbar-brand" href="/logout">Выйти</a>
+        <button class="addnote-button" id="show-dialog-btn">Добавить заметку</button>
         <!--Вызов диалогового окна-->
-    {% block modal %}{% endblock %}
-
+        {% block modal %}{% endblock %}
         {% else %}
     <p>
         <!--<a class="btn btn-primary " href="/register">Зарегистрироваться</a>

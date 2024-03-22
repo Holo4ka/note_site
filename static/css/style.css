@@ -30,3 +30,13 @@ dialog {
     height: 250px;
     width: 100%
 }
+
+.header {
+  text-decoration: bold;
+  font-size: 24px
+}
+
+.col-md6 border rounded {
+  height: 200px;
+  margin: 0 auto
+}
