@@ -1,15 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Заметки</h1>
+
 {% for item in notes%}
-<div class="col-md6 border rounded">
+<div class="col-md6 border rounded holochka">
 
     <div class="header">
-        Название - {{item.header}}
+        Название - <br>
+        {{item.header}}
     </div>
     <div>
-        {{item.text}}
+        <p class="peshka">{{item.text}}</p>
     </div>
 </div>
 {% endfor %}
@@ -51,7 +52,6 @@
   const showDialogBtn = document.querySelector('#show-dialog-btn');
   const myDialog = document.querySelector('#my-dialog');
   const closeDialogBtn = document.querySelector('#close-dialog-btn');
-  const submitDialogBtn = document.querySelector('#submit_btn')
 
   showDialogBtn.addEventListener('click', () => {
     myDialog.showModal();

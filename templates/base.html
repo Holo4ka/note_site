@@ -21,15 +21,27 @@
         {% else %}
     <p>
         <!--<a class="btn btn-primary " href="/register">Зарегистрироваться</a>
-        <a class="btn btn-success" href="/login">Войти</a>-->
+        <a class="btn btn-success" href="/login">Войти</a>
+        $(this).css("background-color", "white");-->
     </p>
 {% endif %}
 
     </nav>
 </header>
 <!-- Begin page content -->
+<h1 class="main_header">Заметки</h1>
 <main role="main" class="container">
     {% block content %}{% endblock %}
 </main>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.10.0/jquery-ui.min.js"></script>
+<script>
+    $('.holochka').click(function(){
+$(this).css("color", "yellow");
+$(this).css("font", "14em");
+$(this).css("overflow-y", "scroll");
+$(this).draggable();
+});
+</script>
 </body>
 </html>

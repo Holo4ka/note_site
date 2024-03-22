@@ -15,7 +15,7 @@
 
 .addnote-button:hover {
   color: white;
-  text-decoration: none
+  text-decoration: none;
 }
 
 dialog {
@@ -28,15 +28,44 @@ dialog {
 
 .large-text {
     height: 250px;
-    width: 100%
+    width: 100%;
 }
 
 .header {
   text-decoration: bold;
-  font-size: 24px
+  font-size: 24px;
 }
 
 .col-md6 border rounded {
   height: 200px;
-  margin: 0 auto
+  margin: 0 auto;
+}
+
+.holochka {
+  width: auto;
+  max-width: 15rem;
+  height: 6rem;
+  color: red;
+  background-color: orange;
+  margin: 1rem 30px;
+  padding: 1rem;
+  border-radius: 30%;
+  border: 1px solid black;
+  text-align: left;
+  overflow: hidden;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.peshka {
+  font-size: 1.2rem;
+}
+
+.main_header {
+  margin: 1rem;
 }
