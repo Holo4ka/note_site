@@ -1,4 +1,4 @@
-from flask import Flask, request, url_for, redirect, render_template
+from flask import Flask, redirect, render_template, request, jsonify
 from loginform import LoginForm
 from data import db_session
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
@@ -6,6 +6,8 @@ from data.users import User
 from data.notes import Note
 from forms.user import RegisterForm
 from forms.newNoteForm import NoteAddingForm
+from forms.delete import DeleteNote
+import json
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
@@ -32,7 +34,7 @@ def reqister():
             return render_template('register.html', title='Регистрация',
                                    form=form,
                                    message="Такой пользователь уже есть")
-        user = User(name=form.name.data, email=form.email.data,)
+        user = User(name=form.name.data, email=form.email.data)
         user.set_password(form.password.data)
         db_sess.add(user)
         db_sess.commit()
@@ -67,10 +69,11 @@ def index():
     db_sess = db_session.create_session()
     if current_user.is_authenticated:
         notes = db_sess.query(Note).filter(Note.user == current_user)
-        form = NoteAddingForm()
-        if form.validate_on_submit():
+        add_form = NoteAddingForm()
+        delete_form = DeleteNote()
+        if add_form.validate_on_submit():
             user = db_sess.query(User).filter(User.email == current_user.email).first()
-            note = Note(user_id=user.id, text=form.text.data, coords=" ")
+            note = Note(user_id=user.id, text=add_form.text.data, header=add_form.header.data)
             db_sess.add(note)
             db_sess.commit()
             return redirect('/')
@@ -78,7 +81,19 @@ def index():
     else:
         return redirect('/login')
 
-    return render_template("index.html", notes=notes, form=form)
+    return render_template("index.html", notes=notes, add_form=add_form, delete_form=delete_form)
+
+
+@app.route('/delete', methods=['POST'])
+@login_required
+def delete_note():
+    req = request.form.getlist('id')
+    note_id = req[0] if req[0] else req[1]
+    db_sess = db_session.create_session()
+    note = db_sess.query(Note).filter(Note.id == note_id).first()
+    db_sess.delete(note)
+    db_sess.commit()
+    return redirect('/')
 
 
 if __name__ == '__main__':

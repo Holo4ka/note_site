@@ -9,6 +9,6 @@ class Note(SqlAlchemyBase):
     id = sqlalchemy.Column(sqlalchemy.Integer, primary_key=True, autoincrement=True)
     user_id = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey("users.id"))
     text = sqlalchemy.Column(sqlalchemy.String, nullable=False)
-    coords = sqlalchemy.Column(sqlalchemy.String, nullable=False)
+    header = sqlalchemy.Column(sqlalchemy.String, nullable=False)
 
     user = orm.relationship('User')

@@ -2,16 +2,23 @@
 
 {% block content %}
 
-{% for item in notes%}
+{% for item in notes %}
 <div class="col-md6 border rounded holochka">
 
     <div class="header">
-        Название - <br>
         {{item.header}}
     </div>
+
     <div>
-        <p class="peshka">{{item.text}}</p>
+        <p class="note-text">{{item.text}}</p>
     </div>
+    <form method="post" action="/delete" >
+        {{ delete_form.hidden_tag() }}
+        {{ delete_form.id(value=item.id) }}
+        {{ delete_form.submit(type="submit") }}
+        <!--<input type="hidden" value={{item.id}}>
+        <input type="submit" value="Удалить">-->
+    </form>
 </div>
 {% endfor %}
 
@@ -21,27 +28,27 @@
 <{% block modal %}
 <dialog id="my-dialog">
     <form action="" method="post">
-        {{ form.hidden_tag() }}
+        {{ add_form.hidden_tag() }}
     <h1>Новая заметка</h1>
     <p>
-    {{ form.header.label }}<br>
-    {{ form.header(class="form-control") }}<br>
-    {% for error in form.header.errors %}
+    {{ add_form.header.label }}<br>
+    {{ add_form.header(class="form-control") }}<br>
+    {% for error in add_form.header.errors %}
             <p class="alert alert-danger" role="alert">
                 {{ error }}
             </p>
         {% endfor %}
     </p>
     <p>
-        {{ form.text.label }}<br>
-        {{ form.text(class="large-text") }}<br>
-        {% for error in form.text.errors %}
+        {{ add_form.text.label }}<br>
+        {{ add_form.text(class="large-text") }}<br>
+        {% for error in add_form.text.errors %}
             <p class="alert alert-danger" role="alert">
                 {{ error }}
             </p>
         {% endfor %}
     </p>
-    <p>{{ form.submit(type="submit", class="btn btn-primary") }}</p>
+    <p>{{ add_form.submit(type="submit", class="btn btn-primary") }}</p>
     {{message}}
     </form>
   <button id="close-dialog-btn">Закрыть</button>
