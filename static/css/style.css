@@ -19,10 +19,11 @@
 }
 
 dialog {
-    width: 600px; /* Ширина диалогового окна */
-    height: 600px; /* Высота диалогового окна */
-    background-color: #f0f0f0; /* Цвет фона диалогового окна */
-    border: 1px solid #ccc; /* Граница диалогового окна */
+    width: 600px;
+    height: fit-content;
+    max-height: 90%;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
     border-radius: 5px;
 }
 
@@ -33,7 +34,7 @@ dialog {
 
 .header {
   text-decoration: bold;
-  font-size: 24px;
+  font-size: 20px;
 }
 
 .col-md6 border rounded {
@@ -43,8 +44,8 @@ dialog {
 
 .holochka {
   width: auto;
-  max-width: 15rem;
-  height: 6rem;
+  max-width: 40rem;
+  height: fit-content;
   color: red;
   background-color: orange;
   margin: 1rem 30px;
@@ -52,7 +53,6 @@ dialog {
   border-radius: 30%;
   border: 1px solid black;
   text-align: left;
-  overflow: hidden;
 }
 
 .container {
@@ -68,4 +68,28 @@ dialog {
 
 .main_header {
   margin: 1rem;
+}
+
+.r1 {
+  position: relative;
+  right: 0;
+  left: auto;
+}
+
+#r2 {
+  justify-content: right;
+}
+
+.role-label {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 0;
+}
+
+.card {
+  margin-top: 1rem;
+}
+
+.delete-form {
+  position: static;
 }

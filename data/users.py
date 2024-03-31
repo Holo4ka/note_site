@@ -14,6 +14,7 @@ class User(SqlAlchemyBase, UserMixin):
     email = sqlalchemy.Column(sqlalchemy.String, index=True, unique=True, nullable=True)
     hashed_password = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     created_date = sqlalchemy.Column(sqlalchemy.DateTime, default=datetime.datetime.now)
+    role = sqlalchemy.Column(sqlalchemy.String, nullable=False)
 
     note = orm.relationship('Note', back_populates='user')
 

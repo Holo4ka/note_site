@@ -34,7 +34,7 @@ def reqister():
             return render_template('register.html', title='Регистрация',
                                    form=form,
                                    message="Такой пользователь уже есть")
-        user = User(name=form.name.data, email=form.email.data)
+        user = User(name=form.name.data, email=form.email.data, role="default")
         user.set_password(form.password.data)
         db_sess.add(user)
         db_sess.commit()
@@ -67,19 +67,21 @@ def logout():
 @app.route("/", methods=['GET', 'POST'])
 def index():
     db_sess = db_session.create_session()
+    add_form = NoteAddingForm()
+    delete_form = DeleteNote()
     if current_user.is_authenticated:
         notes = db_sess.query(Note).filter(Note.user == current_user)
-        add_form = NoteAddingForm()
-        delete_form = DeleteNote()
+
         if add_form.validate_on_submit():
             user = db_sess.query(User).filter(User.email == current_user.email).first()
-            note = Note(user_id=user.id, text=add_form.text.data, header=add_form.header.data)
+            note = Note(user_id=user.id, text=add_form.text.data, header=add_form.header.data,
+                        note_type=add_form.note_type.data)
             db_sess.add(note)
             db_sess.commit()
             return redirect('/')
 
     else:
-        return redirect('/login')
+        notes = db_sess.query(Note).filter(Note.note_type == "news")
 
     return render_template("index.html", notes=notes, add_form=add_form, delete_form=delete_form)
 
