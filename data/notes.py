@@ -13,5 +13,8 @@ class Note(SqlAlchemyBase):
     header = sqlalchemy.Column(sqlalchemy.String, nullable=False)
     note_type = sqlalchemy.Column(sqlalchemy.String, nullable=False)
     creation_date = sqlalchemy.Column(sqlalchemy.DateTime, default=datetime.datetime.now)
+    was_changed = sqlalchemy.Column(sqlalchemy.BOOLEAN, default=False, nullable=False)
+    left = sqlalchemy.Column(sqlalchemy.Double)
+    top = sqlalchemy.Column(sqlalchemy.Double)
 
     user = orm.relationship('User')

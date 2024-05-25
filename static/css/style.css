@@ -1,3 +1,10 @@
+body {
+  /*background-color: pink;*/
+  background-image: url("https://gas-kvas.com/grafic/uploads/posts/2023-09/1695978653_gas-kvas-com-p-kartinki-soti-33.jpg");
+  background-size: cover;
+}
+
+
 .addnote-button {
   text-decoration: none;
   display: inline-block;
@@ -47,12 +54,13 @@ dialog {
   max-width: 40rem;
   height: fit-content;
   color: red;
-  background-color: orange;
-  margin: 1rem 30px;
+  /*background-color: orange;*/
+  margin: 1rem 15px;
   padding: 1rem;
-  border-radius: 30%;
-  border: 1px solid black;
+  /*border-radius: 30%;*/
+  border: 1px solid gray;
   text-align: left;
+  background-color: rgba(255, 255, 255, 0.93)
 }
 
 .container {
@@ -60,6 +68,7 @@ dialog {
   flex-direction: row;
   justify-content: space-between;
   flex-wrap: wrap;
+  max-width: 90%;
 }
 
 .note-text {
@@ -68,6 +77,8 @@ dialog {
 
 .main_header {
   margin: 1rem;
+  color: white;
+  text-shadow: darkred 2px 5px;/*1px 0px 10px pink;*/
 }
 
 .r1 {
@@ -78,6 +89,11 @@ dialog {
 
 #r2 {
   justify-content: right;
+
+}
+
+.navbar {
+  background-color: rgba(255, 255, 255, 0.65);
 }
 
 .role-label {
@@ -92,4 +108,17 @@ dialog {
 
 .delete-form {
   position: static;
+}
+
+.login_form, .register-form {
+  width: 60%;
+  margin: auto;
+  text-align: center;
+  margin-top: 4rem;
+}
+
+.login_form input, .register-form input {
+  max-width: 60%;
+  margin: auto;
+  text-align: center;
 }

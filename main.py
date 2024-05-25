@@ -21,7 +21,7 @@ def load_user(user_id):
     return db_sess.query(User).get(user_id)
 
 
-@app.route('/register', methods=['GET', 'POST'])
+@app.route('/register', methods=['GET', 'POST'])  #TODO: письмо на почту
 def reqister():
     form = RegisterForm()
     if form.validate_on_submit():
@@ -69,6 +69,8 @@ def index():
     db_sess = db_session.create_session()
     add_form = NoteAddingForm()
     delete_form = DeleteNote()
+    count = len(db_sess.query(User).all())
+    authors = [(db_sess.query(User).filter(User.id == i)).first().name for i in range(1, count + 1)]
     if current_user.is_authenticated:
         notes = db_sess.query(Note).filter(Note.user == current_user)
 
@@ -83,7 +85,7 @@ def index():
     else:
         notes = db_sess.query(Note).filter(Note.note_type == "news")
 
-    return render_template("index.html", notes=notes, add_form=add_form, delete_form=delete_form)
+    return render_template("index.html", notes=notes, add_form=add_form, delete_form=delete_form, authors=authors)
 
 
 @app.route('/delete', methods=['POST'])
@@ -96,6 +98,11 @@ def delete_note():
     db_sess.delete(note)
     db_sess.commit()
     return redirect('/')
+
+
+# TODO: 
+'''@app.route('/update', methods=["POST"])
+def update_notes_info():'''
 
 
 if __name__ == '__main__':

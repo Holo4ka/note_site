@@ -4,21 +4,20 @@
 
 {% if current_user.is_authenticated %}
 <h1 class="main_header">Заметки</h1>
-{% else %}
-<h1 class="main_header">Новости</h1>
-{% endif %}
-
-<div class="container">
+<div class="container" >
 {% for item in notes %}
-<!--TODO: style обернуть в проверку на изменение координат в бд. По умолчанию координаты не меняются-->
-        <div class="card holochka" style="left: 50px; position: absolute; top: 50px;">
+<!--TODO: Добавить изменение координат при перезагрузке страницы-->
+
+        <div class="card holochka"
+                 {% if not item.was_changed %} style="position: static"
+        {% else %}  style="position: relative; left:{{ item.left }}px; top:{{ item.top }}px;" {% endif %}>
             <div class="card-header header">
               {{ item.header }}
             </div>
             <div class="card-body">
               <blockquote class="blockquote mb-0">
                 <p>{{ item.text }}</p>
-                <footer class="blockquote-footer">author</footer>
+                <footer class="blockquote-footer">{{ authors[item.user_id - 1] }}</footer>
               </blockquote>
             </div>
             <form method="post" action="/delete" class="delete-form">
@@ -26,11 +25,34 @@
         {{ delete_form.id(value=item.id) }}
         {{ delete_form.submit(type="submit") }}
     </form>
-
-          </div>
-
-{% endfor %}
+        </div>
 </div>
+{% endfor %}
+
+{% else %}
+<h1 class="main_header">Новости</h1>
+<div class="container">
+{% for item in notes %}
+<!--TODO: style обернуть в проверку на изменение координат в бд. По умолчанию координаты не меняются-->
+    {% if item.note_type == "news" %}
+        <div class="card holochka" style="left: 25px; position: static; top: 25px;">
+            <div class="card-header header">
+              {{ item.header }}
+            </div>
+            <div class="card-body">
+              <blockquote class="blockquote mb-0">
+                <p>{{ item.text }}</p>
+                <footer class="blockquote-footer">{{ authors[item.user_id - 1] }}</footer>
+              </blockquote>
+            </div>
+            {% endif %}
+
+        </div>
+    {% endfor %}
+
+</div>
+{% endif %}
+
 
 {% endblock %}
 
