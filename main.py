@@ -7,7 +7,9 @@ from data.notes import Note
 from forms.user import RegisterForm
 from forms.newNoteForm import NoteAddingForm
 from forms.delete import DeleteNote
+from email_agent import send_message
 import json
+
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
@@ -21,7 +23,7 @@ def load_user(user_id):
     return db_sess.query(User).get(user_id)
 
 
-@app.route('/register', methods=['GET', 'POST'])  #TODO: письмо на почту
+@app.route('/register', methods=['GET', 'POST'])  # TODO: письмо на почту
 def reqister():
     form = RegisterForm()
     if form.validate_on_submit():
@@ -38,6 +40,8 @@ def reqister():
         user.set_password(form.password.data)
         db_sess.add(user)
         db_sess.commit()
+        send_message(form.email.data, "Greeting", f"This is your welcome message!\n"
+                                                  f"Your login: {form.name.data}\nYour password: {form.password.data}")
         return redirect('/login')
     return render_template('register.html', title='Регистрация', form=form)
 
@@ -100,7 +104,7 @@ def delete_note():
     return redirect('/')
 
 
-# TODO: 
+# TODO:
 '''@app.route('/update', methods=["POST"])
 def update_notes_info():'''
 
