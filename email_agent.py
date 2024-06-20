@@ -4,10 +4,6 @@ from email.mime.text import MIMEText
 
 smtpObj = smtplib.SMTP('smtp.gmail.com', 587)
 smtpObj.starttls()
-addr_from = "ighor1544@gmail.com"                 # Адресат
-password = "quxn kbhn dtxi pizd"
-
-addr_to = "ighor1544@gmail.com"                   # Получатель
 
 msg = MIMEMultipart()                             # Создаем сообщение
 msg['From'] = addr_from                           # Адресат
@@ -36,10 +32,3 @@ def send_message(to_add, subj, message):
     smtpObj.login(addr_from, password)
     smtpObj.send_message(msg)
     smtpObj.quit()
-
-'''smtpObj.login("ighor1544@gmail.com", "quxn kbhn dtxi pizd")
-
-smtpObj.sendmail("ighor1544@gmail.com", "ighor1544@gmail.com", "Hello World")
-
-smtpObj.quit()
-'''
